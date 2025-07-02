@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosy-Be Tours - Découvrez la Perle de Madagascar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ocean': '#0b4f6c',
+                        'teal': '#20b2aa',
+                        'coral': '#ff6b6b',
+                        'sand': '#f5f5dc',
+                        'charcoal': '#2d3748'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .parallax-bg { 
+            background-attachment: fixed; 
+            background-position: center; 
+            background-size: cover; 
+        }
+        .card-hover { 
+            transition: all 0.3s ease; 
+        }
+        .card-hover:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        }
+        .slider-transition {
+            transition: all 0.5s ease-in-out;
+        }
+        html { 
+            scroll-behavior: smooth; 
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-sand text-charcoal">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-ocean">
+                    <i class="fas fa-palm-tree mr-2"></i>Nosy-Be Tours
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('hero')" class="text-charcoal hover:text-ocean transition-colors">Accueil</button>
+                    <button onclick="scrollToSection('introduction')" class="text-charcoal hover:text-ocean transition-colors">À propos</button>
+                    <button onclick="scrollToSection('attractions')" class="text-charcoal hover:text-ocean transition-colors">Attractions</button>
+                    <button onclick="scrollToSection('galerie')" class="text-charcoal hover:text-ocean transition-colors">Galerie</button>
+                    <button onclick="scrollToSection('infos')" class="text-charcoal hover:text-ocean transition-colors">Infos pratiques</button>
+                </div>
+                <button class="md:hidden text-ocean" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg hidden">
+                <div class="px-6 py-4 space-y-4">
+                    <button onclick="scrollToSection('hero')" class="block text-charcoal hover:text-ocean transition-colors">Accueil</button>
+                    <button onclick="scrollToSection('introduction')" class="block text-charcoal hover:text-ocean transition-colors">À propos</button>
+                    <button onclick="scrollToSection('attractions')" class="block text-charcoal hover:text-ocean transition-colors">Attractions</button>
+                    <button onclick="scrollToSection('galerie')" class="block text-charcoal hover:text-ocean transition-colors">Galerie</button>
+                    <button onclick="scrollToSection('infos')" class="block text-charcoal hover:text-ocean transition-colors">Infos pratiques</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative h-screen flex items-center justify-center parallax-bg"
+             style="background-image: linear-gradient(rgba(11, 79, 108, 0.4), rgba(32, 178, 170, 0.3)), url('https://images.unsplash.com/photo-1592998657521-76bb8b7c204c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG5vc3klMjBiZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=2070&q=80')">
+        <div class="text-center text-white max-w-4xl px-6 fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Découvrez <span class="text-coral">Nosy-Be</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 font-light">
+                La perle de l'Océan Indien vous attend avec ses plages paradisiaques et sa nature préservée
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToSection('attractions')" class="bg-coral hover:bg-red-400 text-white px-8 py-4 rounded-full font-semibold transition-all transform hover:scale-105">
+                    Découvrir les attractions
+                </button>
+                <button onclick="scrollToSection('infos')" class="bg-white/20 hover:bg-white/30 text-white border-2 border-white px-8 py-4 rounded-full font-semibold transition-all">
+                    Infos pratiques
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-ocean mb-8 slide-up">
+                    Bienvenue à Nosy-Be
+                </h2>
+                <div class="w-24 h-1 bg-coral mx-auto mb-8"></div>
+                <p class="text-lg md:text-xl leading-relaxed text-charcoal/80 mb-8">
+                    Surnommée "l'île aux parfums", Nosy-Be est un joyau tropical situé au large de la côte nord-ouest de Madagascar. 
+                    Cette île paradisiaque offre un mélange unique de plages de sable blanc, de forêts tropicales luxuriantes, 
+                    de plantations d'ylang-ylang et d'une culture riche métissée. Que vous soyez amateur de plongée, 
+                    passionné de nature ou simplement en quête de détente, Nosy-Be saura vous séduire par sa beauté authentique 
+                    et son hospitalité légendaire.
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-teal/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-sun text-teal text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Climat tropical</h3>
+                        <p class="text-charcoal/70">Températures agréables toute l'année</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-coral/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-leaf text-coral text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Nature préservée</h3>
+                        <p class="text-charcoal/70">Biodiversité exceptionnelle</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-ocean/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-water text-ocean text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">Eaux cristallines</h3>
+                        <p class="text-charcoal/70">Parfaites pour la plongée</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attractions Section -->
+    <section id="attractions" class="py-20 bg-sand">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-ocean mb-4">
+                    Points d'Intérêt Touristiques
+                </h2>
+                <div class="w-24 h-1 bg-coral mx-auto mb-6"></div>
+                <p class="text-xl text-charcoal/80 max-w-2xl mx-auto">
+                    Découvrez les merveilles naturelles et culturelles qui font de Nosy-Be une destination unique
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://images.unsplash.com/photo-1656829500356-3b6f7c3b4c65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bm9zeSUyMGJlfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&h=600" 
+                         alt="Vue panoramique du Mont Passot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-ocean mb-3">Mont Passot</h3>
+                        <p class="text-charcoal/80 mb-4">
+                            Point culminant de l'île offrant une vue panoramique spectaculaire sur les lacs sacrés et le coucher de soleil le plus magique de Madagascar.
+                        </p>
+                        <div class="flex items-center text-teal text-sm">
+                            <i class="fas fa-mountain mr-2"></i>
+                            <span>329m d'altitude</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://images.unsplash.com/photo-1621794506077-6818dd4c2042?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZvciVDMyVBQXQlMjB0cm9waWNhbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&h=600" 
+                         alt="Forêt tropicale de Lokobe" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-ocean mb-3">Réserve de Lokobe</h3>
+                        <p class="text-charcoal/80 mb-4">
+                            Dernière forêt primaire de Nosy-Be, sanctuaire de biodiversité abritant des lémuriens, caméléons et de nombreuses espèces endémiques.
+                        </p>
+                        <div class="flex items-center text-teal text-sm">
+                            <i class="fas fa-tree mr-2"></i>
+                            <span>740 hectares protégés</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://images.unsplash.com/photo-1727940584070-b257471f1b99?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBsYWdlJTIwQW5kaWxhbmElMjBub3N5JTIwYmV8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+                         alt="Plage d'Andilana" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-ocean mb-3">Plage d'Andilana</h3>
+                        <p class="text-charcoal/80 mb-4">
+                            Plage de sable blanc immaculé bordée de cocotiers, aux eaux turquoise parfaites pour la baignade et les sports nautiques.
+                        </p>
+                        <div class="flex items-center text-teal text-sm">
+                            <i class="fas fa-umbrella-beach mr-2"></i>
+                            <span>5km de sable blanc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <img src="https://images.unsplash.com/photo-1716110641315-69efa0a553f3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8eWxhbmclMjB5bGFuZ3xlbnwwfHwwfHx8MA%3D&auto=format&fit=crop&w=800&h=600" 
+                         alt="Plantations d'ylang-ylang" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-ocean mb-3">Plantations d'Ylang-Ylang</h3>
+                        <p class="text-charcoal/80 mb-4">
+                            Découvrez les parfums envoûtants des plantations d'ylang-ylang qui donnent à l'île son surnom "d'île aux parfums".
+                        </p>
+                        <div class="flex items-center text-teal text-sm">
+                            <i class="fas fa-seedling mr-2"></i>
+                            <span>Distillerie traditionnelle</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Gallery Section - SLIDER CORRIGÉ -->
+    <section id="galerie" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-ocean mb-4">
+                    Galerie de Nosy-Be
+                </h2>
+                <div class="w-24 h-1 bg-coral mx-auto mb-6"></div>
+                <p class="text-xl text-charcoal/80 max-w-2xl mx-auto">
+                    Laissez-vous transporter par la beauté naturelle de notre île paradisiaque
+                </p>
+            </div>
+            
+            <div class="relative max-w-6xl mx-auto">
+                <!-- Main slider container - LARGEUR ET HAUTEUR AJUSTÉES -->
+                <div class="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl">
+                    <img id="sliderImage" src="" alt="" class="w-full h-full object-cover object-center slider-transition">
+                    
+                    <!-- Navigation arrows -->
+                    <button onclick="prevSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-ocean p-3 rounded-full shadow-lg transition-all z-10">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-ocean p-3 rounded-full shadow-lg transition-all z-10">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Play/Pause button -->
+                    <button onclick="togglePlayPause()" id="playPauseBtn" class="absolute top-4 right-4 bg-white/80 hover:bg-white text-ocean p-3 rounded-full shadow-lg transition-all z-10">
+                        <i class="fas fa-pause"></i>
+                    </button>
+
+                    <!-- Image counter -->
+                    <div id="imageCounter" class="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                        1 / 5
+                    </div>
+                </div>
+                
+                <!-- Slider indicators -->
+                <div id="sliderIndicators" class="flex justify-center mt-8 space-x-2">
+                    <!-- Indicators seront générés par JavaScript -->
+                </div>
+
+                <!-- Controls info -->
+                <div class="text-center mt-4 text-sm text-charcoal/60">
+                    <p id="controlsInfo">
+                        <i class="fas fa-play mr-1"></i>
+                        Lecture automatique active • Cliquez sur pause pour arrêter
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="infos" class="py-20 bg-sand">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-ocean mb-4">
+                    Informations Pratiques
+                </h2>
+                <div class="w-24 h-1 bg-coral mx-auto mb-6"></div>
+                <p class="text-xl text-charcoal/80 max-w-2xl mx-auto">
+                    Tout ce que vous devez savoir pour planifier votre voyage à Nosy-Be
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+                    <div class="w-16 h-16 bg-ocean/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-plane text-ocean text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean mb-4">Accès à l'île</h3>
+                    <ul class="text-charcoal/80 space-y-2 text-left">
+                        <li>• Vol direct depuis Antananarivo</li>
+                        <li>• Durée: 1h30 de vol</li>
+                        <li>• Aéroport Fascene (NOS)</li>
+                        <li>• Liaison maritime depuis Ankify</li>
+                        <li>• Ferry quotidien disponible</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+                    <div class="w-16 h-16 bg-teal/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-thermometer-half text-teal text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean mb-4">Climat</h3>
+                    <ul class="text-charcoal/80 space-y-2 text-left">
+                        <li>• Tropical chaud et humide</li>
+                        <li>• Température: 20-30°C</li>
+                        <li>• Saison sèche: Mai-Octobre</li>
+                        <li>• Saison des pluies: Nov-Avril</li>
+                        <li>• Alizés rafraîchissants</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+                    <div class="w-16 h-16 bg-coral/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-alt text-coral text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean mb-4">Période idéale</h3>
+                    <ul class="text-charcoal/80 space-y-2 text-left">
+                        <li>• Avril à Novembre optimal</li>
+                        <li>• Observation baleines: Juin-Sept</li>
+                        <li>• Plongée: toute l'année</li>
+                        <li>• Éviter Janvier-Mars</li>
+                        <li>• Cyclones possibles</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+                    <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-paw text-emerald-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-ocean mb-4">Espèces endémiques</h3>
+                    <ul class="text-charcoal/80 space-y-2 text-left">
+                        <li>• Lémurien Macaco</li>
+                        <li>• Caméléon panthère</li>
+                        <li>• Gecko de jour</li>
+                        <li>• Boa de Madagascar</li>
+                        <li>• 200+ espèces d'oiseaux</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ocean text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand -->
+                <div class="md:col-span-2">
+                    <div class="text-2xl font-bold mb-4">
+                        <i class="fas fa-palm-tree mr-2"></i>Nosy-Be Tours
+                    </div>
+                    <p class="text-white/80 mb-6 max-w-md">
+                        Découvrez la magie de Nosy-Be avec des expériences authentiques et mémorables. 
+                        Votre passerelle vers l'île aux parfums de Madagascar.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-white/20 hover:bg-white/30 p-3 rounded-full transition-all">
+                            <i class="fab fa-tripadvisor"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2 text-white/80">
+                        <li><button onclick="scrollToSection('hero')" class="hover:text-white transition-colors">Accueil</button></li>
+                        <li><button onclick="scrollToSection('introduction')" class="hover:text-white transition-colors">À propos</button></li>
+                        <li><button onclick="scrollToSection('attractions')" class="hover:text-white transition-colors">Attractions</button></li>
+                        <li><button onclick="scrollToSection('galerie')" class="hover:text-white transition-colors">Galerie</button></li>
+                        <li><button onclick="scrollToSection('infos')" class="hover:text-white transition-colors">Infos pratiques</button></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-white/80">
+                        <li><i class="fas fa-envelope mr-2"></i>info@nosybetours.mg</li>
+                        <li><i class="fas fa-phone mr-2"></i>+261 32 XX XXX XX</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Hell-Ville, Nosy-Be</li>
+                        <li><i class="fas fa-clock mr-2"></i>Lun-Dim: 8h-18h</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-12 pt-8 text-center text-white/60">
+                <p>&copy; 2024 Nosy-Be Tours. Tous droits réservés. Créé avec passion pour Madagascar.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery images pour le nouveau slider
+        const sliderImages = [
+            {
+                src: 'https://images.unsplash.com/photo-1656829500356-3b6f7c3b4c65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bm9zeSUyMGJlfGVufDB8fDB8fHww%3D%3D&auto=format&fit=crop&w=1200&h=800',
+                alt: 'Plage paradisiaque de Nosy-Be avec sable blanc et palmiers'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1613409466099-04ebd4d69d7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bm9zeSUyMGJlfGVufDB8fDB8fHww%3D%3D&auto=format&fit=crop&w=1200&h=800',
+                alt: 'Vue aérienne des eaux turquoise autour de Nosy-Be'
+            },
+            {
+                src: 'https://plus.unsplash.com/premium_photo-1666721922432-49f64a5db919?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFkYWdhc2NhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1200&h=800',
+                alt: 'Coucher de soleil spectaculaire sur l\'océan Indien depuis Nosy-Be'
+            },
+            {
+                src: 'https://images.unsplash.com/photo-1602174423520-daa2d87175a0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hZGFnYXNjYXJ8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=1200&h=800',
+                alt: 'Baobab majestueux de Madagascar sous le ciel tropical'
+            },
+            {
+                src: 'https://plus.unsplash.com/premium_photo-1661860690285-7c456a4f5a49?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fG1hZGFnYXNjYXJ8ZW58MHx8MHx8fDA%3D%3D&auto=format&fit=crop&w=1200&h=800',
+                alt: 'Forêt tropicale luxuriante de la réserve de Lokobe'
+            }
+        ];
+
+        let currentSliderIndex = 0;
+        let isSliderPlaying = true;
+        let sliderInterval;
+
+        function updateSlider() {
+            const image = document.getElementById('sliderImage');
+            const counter = document.getElementById('imageCounter');
+            
+            image.src = sliderImages[currentSliderIndex].src;
+            image.alt = sliderImages[currentSliderIndex].alt;
+            counter.textContent = `${currentSliderIndex + 1} / ${sliderImages.length}`;
+
+            // Update indicators
+            const indicators = document.querySelectorAll('.slider-indicator');
+            indicators.forEach((indicator, index) => {
+                if (index === currentSliderIndex) {
+                    indicator.classList.remove('bg-gray-300');
+                    indicator.classList.add('bg-coral', 'scale-125');
+                } else {
+                    indicator.classList.remove('bg-coral', 'scale-125');
+                    indicator.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSliderIndex = (currentSliderIndex + 1) % sliderImages.length;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSliderIndex = (currentSliderIndex - 1 + sliderImages.length) % sliderImages.length;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSliderIndex = index;
+            updateSlider();
+        }
+
+        function togglePlayPause() {
+            isSliderPlaying = !isSliderPlaying;
+            const btn = document.getElementById('playPauseBtn');
+            const info = document.getElementById('controlsInfo');
+            
+            if (isSliderPlaying) {
+                btn.innerHTML = '<i class="fas fa-pause"></i>';
+                info.innerHTML = '<i class="fas fa-play mr-1"></i>Lecture automatique active • Cliquez sur pause pour arrêter';
+                startSliderInterval();
+            } else {
+                btn.innerHTML = '<i class="fas fa-play"></i>';
+                info.innerHTML = '<i class="fas fa-pause mr-1"></i>Lecture en pause • Cliquez sur play pour reprendre';
+                clearInterval(sliderInterval);
+            }
+        }
+
+        function startSliderInterval() {
+            if (isSliderPlaying) {
+                sliderInterval = setInterval(nextSlide, 4000);
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            // Close mobile menu if open
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // Initialize slider
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create indicators
+            const indicators = document.getElementById('sliderIndicators');
+            sliderImages.forEach((_, index) => {
+                const indicator = document.createElement('button');
+                indicator.className = `w-3 h-3 rounded-full transition-all slider-indicator ${index === 0 ? 'bg-coral scale-125' : 'bg-gray-300'}`;
+                indicator.onclick = () => goToSlide(index);
+                indicators.appendChild(indicator);
+            });
+
+            updateSlider();
+            startSliderInterval();
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
